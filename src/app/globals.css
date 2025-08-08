@@ -87,18 +87,26 @@ body {
   }
 }
 
+@page {
+  size: A4;
+  margin: 0;
+}
+
 @media print {
-  body * {
-    visibility: hidden;
-  }
-  .printable-area, .printable-area * {
-    visibility: visible;
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
   .printable-area {
+    visibility: visible;
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
     height: auto;
+  }
+  .no-print, .no-print * {
+    visibility: hidden;
+    display: none;
   }
 }

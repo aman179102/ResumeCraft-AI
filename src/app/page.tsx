@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { initialResumeData, type ResumeData, type Template } from '@/lib/types';
 import HeaderControls from '@/components/header-controls';
 import ResumeForm from '@/components/resume-form';
@@ -12,6 +12,8 @@ export default function Home() {
   const [resumeData, setResumeData] = useState<ResumeData>(initialResumeData);
   const [template, setTemplate] = useState<Template>('classic');
   const [isMounted, setIsMounted] = useState(false);
+  const previewRef = useRef<HTMLDivElement>(null);
+
 
   useEffect(() => {
     try {
@@ -70,7 +72,7 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-background/80">
+    <div className="flex flex-col min-h-screen bg-background/80 no-print">
       <HeaderControls
         template={template}
         setTemplate={setTemplate}
@@ -82,7 +84,7 @@ export default function Home() {
         </div>
         <div className="h-[calc(100vh-4rem)] overflow-y-auto px-4 md:px-8 py-6 print:h-auto print:overflow-visible">
             <Card className="p-2 md:p-4 lg:p-8 shadow-2xl h-full print:shadow-none print:border-none">
-              <ResumePreview resumeData={resumeData} template={template} />
+              <ResumePreview ref={previewRef} resumeData={resumeData} template={template} />
             </Card>
         </div>
       </main>
