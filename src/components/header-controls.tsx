@@ -13,12 +13,6 @@ import {
 } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import type { ResumeData, Template } from '@/lib/types';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 
 interface HeaderControlsProps {
   template: Template;
@@ -128,24 +122,14 @@ export default function HeaderControls({
           </SelectContent>
         </Select>
 
-        <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-                <Button>
-                    <Download className="mr-2" />
-                    Export
-                </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-                <DropdownMenuItem onClick={handlePrint}>
-                    <Download className="mr-2" />
-                    Export to PDF
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={handleTxtExport}>
-                    <FileText className="mr-2" />
-                    Export to TXT
-                </DropdownMenuItem>
-            </DropdownMenuContent>
-        </DropdownMenu>
+        <Button onClick={handlePrint} variant="outline">
+            <Download className="mr-2" />
+            Export to PDF
+        </Button>
+        <Button onClick={handleTxtExport}>
+            <FileText className="mr-2" />
+            Export to TXT
+        </Button>
       </div>
     </header>
   );
