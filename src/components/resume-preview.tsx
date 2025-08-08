@@ -22,8 +22,10 @@ const ResumePreview = React.forwardRef<HTMLDivElement, ResumePreviewProps>(
     const TemplateComponent = templates[template] || ClassicTemplate;
     
     return (
-      <div ref={ref} className="w-full h-full text-black">
-        <TemplateComponent resumeData={resumeData} />
+      <div ref={ref} className="w-full h-full">
+        <div className="text-black">
+          <TemplateComponent resumeData={resumeData} />
+        </div>
       </div>
     );
   }
