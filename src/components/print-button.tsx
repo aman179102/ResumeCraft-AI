@@ -4,8 +4,9 @@
 import React from 'react';
 import { useReactToPrint } from 'react-to-print';
 import { Download } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import type { ResumeData } from '@/lib/types';
+import { cn } from '@/lib/utils';
+import { buttonVariants } from '@/components/ui/button';
 
 interface PrintButtonProps {
   previewRef: React.RefObject<HTMLDivElement>;
@@ -19,9 +20,12 @@ export default function PrintButton({ previewRef, resumeData }: PrintButtonProps
   });
 
   return (
-    <Button variant="outline" onClick={handlePrint}>
+    <button
+      onClick={handlePrint}
+      className={cn(buttonVariants({ variant: "outline" }))}
+    >
       <Download className="mr-2" />
       Export to PDF
-    </Button>
+    </button>
   );
 }
