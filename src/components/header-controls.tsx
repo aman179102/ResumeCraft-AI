@@ -136,17 +136,13 @@ export default function HeaderControls({
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-                <DropdownMenuItem>
-                    <div onClick={handlePrint} className="flex items-center w-full">
-                        <Download className="mr-2" />
-                        Export to PDF
-                    </div>
+                <DropdownMenuItem onClick={handlePrint}>
+                    <Download className="mr-2" />
+                    Export to PDF
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                    <div onClick={handleTxtExport} className="flex items-center w-full">
-                        <FileText className="mr-2" />
-                        Export to TXT
-                    </div>
+                <DropdownMenuItem onClick={handleTxtExport}>
+                    <FileText className="mr-2" />
+                    Export to TXT
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
