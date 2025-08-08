@@ -2,8 +2,7 @@
 'use client';
 
 import React from 'react';
-import { useReactToPrint } from 'react-to-print';
-import { Download, FileText, Bot } from 'lucide-react';
+import { FileText, Bot } from 'lucide-react';
 
 import {
   Select,
@@ -14,6 +13,7 @@ import {
 } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import type { ResumeData, Template } from '@/lib/types';
+import PrintButton from './print-button';
 
 interface HeaderControlsProps {
   template: Template;
@@ -28,10 +28,6 @@ export default function HeaderControls({
   resumeData,
   previewRef,
 }: HeaderControlsProps) {
-  const handlePrint = useReactToPrint({
-    content: () => previewRef.current,
-    documentTitle: `${resumeData.personalDetails?.name || 'Resume'} - ResumeCraft AI`,
-  });
 
   const formatText = (data: ResumeData): string => {
     let content = '';
@@ -123,12 +119,8 @@ export default function HeaderControls({
           </SelectContent>
         </Select>
 
-        <div onClick={handlePrint}>
-            <Button variant="outline">
-                <Download className="mr-2" />
-                Export to PDF
-            </Button>
-        </div>
+        <PrintButton previewRef={previewRef} resumeData={resumeData} />
+
         <Button onClick={handleTxtExport}>
             <FileText className="mr-2" />
             Export to TXT
