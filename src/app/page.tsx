@@ -12,8 +12,6 @@ export default function Home() {
   const [resumeData, setResumeData] = useState<ResumeData>(initialResumeData);
   const [template, setTemplate] = useState<Template>('classic');
   const [isMounted, setIsMounted] = useState(false);
-  const previewRef = useRef<HTMLDivElement>(null);
-
 
   useEffect(() => {
     try {
@@ -53,6 +51,10 @@ export default function Home() {
     setResumeData(newData);
   };
 
+  const handlePdfExport = () => {
+    window.print();
+  };
+
   if (!isMounted) {
     return (
        <div className="flex flex-col min-h-screen">
@@ -72,22 +74,28 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-background/80 no-print">
-      <HeaderControls
-        template={template}
-        setTemplate={setTemplate}
-        resumeData={resumeData}
-      />
-      <main className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8 print:block">
-        <div className="h-[calc(100vh-4rem)] overflow-y-auto px-4 md:px-8 py-6 print:hidden">
-            <ResumeForm initialData={resumeData} onDataChange={handleFormChange} />
-        </div>
-        <div className="h-[calc(100vh-4rem)] overflow-y-auto px-4 md:px-8 py-6 print:h-auto print:overflow-visible">
-            <Card className="p-2 md:p-4 lg:p-8 shadow-2xl h-full print:shadow-none print:border-none">
-              <ResumePreview ref={previewRef} resumeData={resumeData} template={template} />
-            </Card>
-        </div>
-      </main>
-    </div>
+    <>
+      <div className="flex flex-col min-h-screen bg-background/80">
+        <HeaderControls
+          template={template}
+          setTemplate={setTemplate}
+          resumeData={resumeData}
+          onPdfExport={handlePdfExport}
+        />
+        <main className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8">
+          <div className="h-[calc(100vh-4rem)] overflow-y-auto px-4 md:px-8 py-6">
+              <ResumeForm initialData={resumeData} onDataChange={handleFormChange} />
+          </div>
+          <div className="h-[calc(100vh-4rem)] overflow-y-auto px-4 md:px-8 py-6">
+              <Card className="p-2 md:p-4 lg:p-8 shadow-2xl h-full">
+                <ResumePreview resumeData={resumeData} template={template} />
+              </Card>
+          </div>
+        </main>
+      </div>
+      <div className="printable-area">
+        <ResumePreview resumeData={resumeData} template={template} />
+      </div>
+    </>
   );
 }

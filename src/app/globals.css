@@ -97,16 +97,15 @@ body {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
+  body > *:not(.printable-area) {
+    display: none;
+  }
   .printable-area {
-    visibility: visible;
+    display: block;
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
     height: auto;
-  }
-  .no-print, .no-print * {
-    visibility: hidden;
-    display: none;
   }
 }
