@@ -1,3 +1,4 @@
+
 'use client';
 
 import React from 'react';
@@ -122,10 +123,12 @@ export default function HeaderControls({
           </SelectContent>
         </Select>
 
-        <Button onClick={handlePrint} variant="outline">
-            <Download className="mr-2" />
-            Export to PDF
-        </Button>
+        <div onClick={handlePrint}>
+            <Button variant="outline">
+                <Download className="mr-2" />
+                Export to PDF
+            </Button>
+        </div>
         <Button onClick={handleTxtExport}>
             <FileText className="mr-2" />
             Export to TXT
