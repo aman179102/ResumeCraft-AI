@@ -2,7 +2,7 @@
 'use client';
 
 import React from 'react';
-import { FileText, Bot } from 'lucide-react';
+import { FileText, Bot, Download } from 'lucide-react';
 
 import {
   Select,
@@ -13,20 +13,19 @@ import {
 } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import type { ResumeData, Template } from '@/lib/types';
-import PrintButton from './print-button';
 
 interface HeaderControlsProps {
   template: Template;
   setTemplate: (template: Template) => void;
   resumeData: ResumeData;
-  previewRef: React.RefObject<HTMLDivElement>;
+  handlePrint: () => void;
 }
 
 export default function HeaderControls({
   template,
   setTemplate,
   resumeData,
-  previewRef,
+  handlePrint,
 }: HeaderControlsProps) {
 
   const formatText = (data: ResumeData): string => {
@@ -119,7 +118,10 @@ export default function HeaderControls({
           </SelectContent>
         </Select>
 
-        <PrintButton previewRef={previewRef} resumeData={resumeData} />
+        <Button onClick={handlePrint} variant="outline">
+            <Download className="mr-2" />
+            Export to PDF
+        </Button>
 
         <Button onClick={handleTxtExport}>
             <FileText className="mr-2" />

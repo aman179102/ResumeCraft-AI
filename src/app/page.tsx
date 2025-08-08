@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useReactToPrint } from 'react-to-print';
 import { initialResumeData, type ResumeData, type Template } from '@/lib/types';
 import HeaderControls from '@/components/header-controls';
 import ResumeForm from '@/components/resume-form';
@@ -14,6 +15,11 @@ export default function Home() {
   const [isMounted, setIsMounted] = useState(false);
 
   const previewRef = useRef<HTMLDivElement>(null);
+
+  const handlePrint = useReactToPrint({
+    content: () => previewRef.current,
+    documentTitle: `${resumeData.personalDetails?.name || 'Resume'} - ResumeCraft AI`,
+  });
 
   useEffect(() => {
     try {
@@ -78,15 +84,15 @@ export default function Home() {
         template={template}
         setTemplate={setTemplate}
         resumeData={resumeData}
-        previewRef={previewRef}
+        handlePrint={handlePrint}
       />
       <main className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8 bg-background/80">
         <div className="h-[calc(100vh-4rem)] overflow-y-auto px-4 md:px-8 py-6">
             <ResumeForm initialData={resumeData} onDataChange={handleFormChange} />
         </div>
         <div className="h-[calc(100vh-4rem)] overflow-y-auto px-4 md:px-8 py-6">
-            <Card className="p-2 md:p-4 lg:p-8 shadow-2xl h-full" ref={previewRef}>
-                <ResumePreview resumeData={resumeData} template={template} />
+            <Card className="p-2 md:p-4 lg:p-8 shadow-2xl h-full">
+              <ResumePreview ref={previewRef} resumeData={resumeData} template={template} />
             </Card>
         </div>
       </main>
