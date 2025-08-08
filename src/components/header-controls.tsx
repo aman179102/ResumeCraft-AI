@@ -43,7 +43,7 @@ export default function HeaderControls({
     const { personalDetails, summary, workExperience, education, skills, certifications, projects } = data;
 
     if (personalDetails?.name) content += `${personalDetails.name.toUpperCase()}\n`;
-    if (personalDetails?.email || personalDetails?.phone || personalDetails?.location) {
+    if (personalDetails?.email || personalDetails?.phone || personalDetails?.location || personalDetails?.linkedin || personalDetails?.website) {
         content += [personalDetails.email, personalDetails.phone, personalDetails.location, personalDetails.linkedin, personalDetails.website].filter(Boolean).join(' | ') + '\n';
     }
     content += '\n';
@@ -136,13 +136,17 @@ export default function HeaderControls({
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-                <DropdownMenuItem onClick={handlePrint}>
-                    <Download className="mr-2" />
-                    Export to PDF
+                <DropdownMenuItem>
+                    <div onClick={handlePrint} className="flex items-center w-full">
+                        <Download className="mr-2" />
+                        Export to PDF
+                    </div>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={handleTxtExport}>
-                    <FileText className="mr-2" />
-                    Export to TXT
+                <DropdownMenuItem>
+                    <div onClick={handleTxtExport} className="flex items-center w-full">
+                        <FileText className="mr-2" />
+                        Export to TXT
+                    </div>
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
