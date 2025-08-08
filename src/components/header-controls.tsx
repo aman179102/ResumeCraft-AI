@@ -18,14 +18,12 @@ interface HeaderControlsProps {
   template: Template;
   setTemplate: (template: Template) => void;
   resumeData: ResumeData;
-  handlePrint: () => void;
 }
 
 export default function HeaderControls({
   template,
   setTemplate,
   resumeData,
-  handlePrint,
 }: HeaderControlsProps) {
 
   const formatText = (data: ResumeData): string => {
@@ -96,9 +94,13 @@ export default function HeaderControls({
     document.body.removeChild(link);
   };
 
+  const handlePdfExport = () => {
+    window.print();
+  }
+
 
   return (
-    <header className="sticky top-0 z-10 flex items-center h-16 px-4 md:px-8 border-b bg-card shadow-sm">
+    <header className="sticky top-0 z-10 flex items-center h-16 px-4 md:px-8 border-b bg-card shadow-sm print:hidden">
       <div className="flex items-center gap-2">
         <Bot className="h-7 w-7 text-primary" />
         <h1 className="text-xl md:text-2xl font-bold text-primary tracking-tight">
@@ -118,7 +120,7 @@ export default function HeaderControls({
           </SelectContent>
         </Select>
 
-        <Button onClick={handlePrint} variant="outline">
+        <Button onClick={handlePdfExport} variant="outline">
             <Download className="mr-2" />
             Export to PDF
         </Button>

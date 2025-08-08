@@ -22,7 +22,7 @@ const ResumePreview = React.forwardRef<HTMLDivElement, ResumePreviewProps>(
     const TemplateComponent = templates[template] || ClassicTemplate;
     
     return (
-      <div ref={ref} className="w-full h-full">
+      <div ref={ref} className="w-full h-full printable-area">
         <div className="text-black">
           <TemplateComponent resumeData={resumeData} />
         </div>
